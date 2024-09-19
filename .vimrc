@@ -1,3 +1,5 @@
+" The simplest vim config just in case
+" It'll need vimplug installed
 set encoding=utf-8
 set hidden
 set number

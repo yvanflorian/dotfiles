@@ -1,0 +1,8 @@
+.pwd
+vault
+**/.git/*
+.log
+.config/tmux/plugins
+# */*.github/*
+# */*.gitignore
+# */lazy-lock.json

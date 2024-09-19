@@ -1,0 +1,4 @@
+theme:
+    name: "nord"
+    chromaStyleOverrides:
+        kc: "#00900 underline"

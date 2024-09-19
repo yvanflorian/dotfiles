@@ -1,0 +1,6 @@
+.git
+.deprecated
+.gitignore
+^/README.*
+^/LICENSE.*
+^/COPYING

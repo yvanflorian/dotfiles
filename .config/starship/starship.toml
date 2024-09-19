@@ -1,0 +1,15 @@
+
+# ~/.config/starship.toml
+
+[golang]
+symbol = ' '
+
+[os.symbols]
+Ubuntu = " "
+
+[custom.flenv_loaded]
+command = "echo $FLENV_ENVIRONMENT"
+when = "test -n \"$FLENV_ENVIRONMENT\""
+style = "bold yellow"
+format = "[<flenv:$output>]($style) "
+

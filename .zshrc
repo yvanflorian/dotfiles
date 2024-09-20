@@ -36,6 +36,7 @@ alias clip="/mnt/c/Windows/System32/clip.exe"
 alias copy="tmux save-buffer - | clip"
 alias gst="git status"
 alias c="clear"
+alias batgo="bat --language go" 
 
 export TZ="Africa/Kampala"
 export EDITOR=nvim
@@ -61,11 +62,6 @@ export NVM_DIR="$HOME/.nvm"
 autoload edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
-
-## JSON.stringify()
-json_marshal(){
-  printf "$1" | jq -c @json
-}
 
 
 ## Custom scripts

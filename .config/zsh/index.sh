@@ -2,6 +2,7 @@
 
 export ZSH_WORK_DIR="$HOME/.config/zsh"
 
+
 #
 # Utility to always call for functions that 
 # require argument. This util will check that the number of 
@@ -13,6 +14,18 @@ flenv_check_number_required_args() {
       echo "Error: Expected at least $expected argument(s), but got $#" >&2
       return 1
   fi
+}
+
+## JSON.stringify()
+json_marshal(){
+  flenv_check_number_required_args 1 "$@" || return 1
+  printf "$1" | jq -c @json
+}
+
+## Godoc
+gd() {
+  flenv_check_number_required_args 1 "$@" || return 1
+  go doc "$1" | bat --language go
 }
 
 # Used only here to check environment flag

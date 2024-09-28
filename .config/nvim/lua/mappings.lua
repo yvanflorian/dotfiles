@@ -12,6 +12,11 @@ map("n", "gr", "<cmd>Telescope lsp_references<CR>", { desc = "references" })
 map("n", "gz", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "diagnostic" })
 map("n", "<leader>fc", "<cmd>Telescope live_grep<CR>", { desc = "Live Grep" })
 
+-- next/previous/delete buffer
+map("n", "<Tab>", "<cmd>bnext<CR>", { desc = "goto next buffer" })
+map("n", "<S-Tab>", "<cmd>bprev<CR>", { desc = "goto previous buffer" })
+map("n", "<leader>x", "<cmd>bdelete<CR>", { desc = "close current buffer" })
+
 --alternate file: Ctrl + " + Enter
 -- map("n", '<C-">', "<cmd>e #<CR>", { desc = "Alternate file" })
 

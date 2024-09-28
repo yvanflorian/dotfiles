@@ -9,6 +9,10 @@ M.ui = {
   transparency = true,
   statusline = {
     theme = "default",
+    separator_style = "block",
+  },
+  tabufline = {
+    enabled = false,
   },
 
   -- hl_override = {
@@ -17,4 +21,6 @@ M.ui = {
   -- },
 }
 
+-- buffer full filename
+vim.cmd [[set winbar=%f]]
 return M

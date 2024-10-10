@@ -13,3 +13,9 @@ when = "test -n \"$FLENV_ENVIRONMENT\""
 style = "bold yellow"
 format = "[<flenv:$output>]($style) "
 
+[custom.flenv_cli_load]
+command = "echo $FLENV_STAGE_ENVIRONMENT"
+when = "test -n \"$FLENV_STAGE_ENVIRONMENT\""
+style = "bold yellow"
+format = "[<flenv:$output>]($style) "
+

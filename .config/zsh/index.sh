@@ -43,49 +43,49 @@ flenv_check_flag() {
 # Loading Environment Variables
 # from the encrypted file
 #
-flenv_load_envs(){
-  flenv_check_number_required_args 1 "$@" || return 1
-  local env="$1"
-  gum log --level debug "env is: $env"
-  flenv_check_flag "$env" || return 1
-
-  local ENVS_FILE="$ZSH_WORK_DIR/envs.yml"
-  ansible-vault decrypt "$ENVS_FILE" > /dev/null 2>&1
-
-  ## Export as environmnent variables
-  export FLENV_ENVIRONMENT="$env"
-  FLENV_DB_USERNAME=$(<"$ENVS_FILE" yq -r ".$env.databases.spifapex_username")
-  FLENV_DB_PASSWORD=$(<"$ENVS_FILE" yq -r ".$env.databases.spifapex_password")
-  FLENV_GOTMS_BASEURL=$(<"$ENVS_FILE" yq -r ".$env.gotms.base_url")
-  FLENV_GOTMS_APIKEY=$(<"$ENVS_FILE" yq -r ".$env.gotms.api_key")
-  FLENV_GOTMS_USERNAME=$(<"$ENVS_FILE" yq -r ".$env.gotms.username")
-  FLENV_GOTMS_PASSWORD=$(<"$ENVS_FILE" yq -r ".$env.gotms.password")
-  FLENV_TMS_BASEURL=$(<"$ENVS_FILE" yq -r ".$env.tms.base_url")
-  FLENV_TMS_RESTPATH=$(<"$ENVS_FILE" yq -r ".$env.tms.rest_path")
-  FLENV_TMS_CW_APIUSER=$(<"$ENVS_FILE" yq -r ".$env.tms.cw_user")
-  FLENV_TMS_CW_APIPASSWORD=$(<"$ENVS_FILE" yq -r ".$env.tms.cw_password")
-  NEST_PREFIX=$(<"$ENVS_FILE" yq -r ".$env.tms.nest_prefix")
-  FLENV_TMS_NEST_BASEURL="$FLENV_TMS_BASEURL$NEST_PREFIX"
-  FLENV_RABBITMQ_BASEURL=$(<"$ENVS_FILE" yq -r ".$env.rabbitmq.base_url")
-  FLENV_RABBITMQ_AUTHHEADER=$(<"$ENVS_FILE" yq -r ".$env.rabbitmq.auth_header")
-
-  export FLENV_DB_USERNAME
-  export FLENV_DB_PASSWORD
-  export FLENV_GOTMS_BASEURL
-  export FLENV_GOTMS_APIKEY
-  export FLENV_GOTMS_USERNAME
-  export FLENV_GOTMS_PASSWORD
-  export FLENV_TMS_BASEURL
-  export FLENV_TMS_RESTPATH
-  export FLENV_TMS_CW_APIUSER
-  export FLENV_TMS_CW_APIPASSWORD
-  export FLENV_TMS_NEST_BASEURL
-  export FLENV_RABBITMQ_BASEURL
-  export FLENV_RABBITMQ_AUTHHEADER
-
-  ansible-vault encrypt "$ENVS_FILE" > /dev/null 2>&1
-  gum log --level debug "FLENV Environments Set Successfully! (prefix: FLENV_*)"
-}
+# flenv_load_envs(){
+#   flenv_check_number_required_args 1 "$@" || return 1
+#   local env="$1"
+#   gum log --level debug "env is: $env"
+#   flenv_check_flag "$env" || return 1
+#
+#   local ENVS_FILE="$ZSH_WORK_DIR/envs.yml"
+#   ansible-vault decrypt "$ENVS_FILE" > /dev/null 2>&1
+#
+#   ## Export as environmnent variables
+#   export FLENV_ENVIRONMENT="$env"
+#   FLENV_DB_USERNAME=$(<"$ENVS_FILE" yq -r ".$env.databases.spifapex_username")
+#   FLENV_DB_PASSWORD=$(<"$ENVS_FILE" yq -r ".$env.databases.spifapex_password")
+#   FLENV_GOTMS_BASEURL=$(<"$ENVS_FILE" yq -r ".$env.gotms.base_url")
+#   FLENV_GOTMS_APIKEY=$(<"$ENVS_FILE" yq -r ".$env.gotms.api_key")
+#   FLENV_GOTMS_USERNAME=$(<"$ENVS_FILE" yq -r ".$env.gotms.username")
+#   FLENV_GOTMS_PASSWORD=$(<"$ENVS_FILE" yq -r ".$env.gotms.password")
+#   FLENV_TMS_BASEURL=$(<"$ENVS_FILE" yq -r ".$env.tms.base_url")
+#   FLENV_TMS_RESTPATH=$(<"$ENVS_FILE" yq -r ".$env.tms.rest_path")
+#   FLENV_TMS_CW_APIUSER=$(<"$ENVS_FILE" yq -r ".$env.tms.cw_user")
+#   FLENV_TMS_CW_APIPASSWORD=$(<"$ENVS_FILE" yq -r ".$env.tms.cw_password")
+#   NEST_PREFIX=$(<"$ENVS_FILE" yq -r ".$env.tms.nest_prefix")
+#   FLENV_TMS_NEST_BASEURL="$FLENV_TMS_BASEURL$NEST_PREFIX"
+#   FLENV_RABBITMQ_BASEURL=$(<"$ENVS_FILE" yq -r ".$env.rabbitmq.base_url")
+#   FLENV_RABBITMQ_AUTHHEADER=$(<"$ENVS_FILE" yq -r ".$env.rabbitmq.auth_header")
+#
+#   export FLENV_DB_USERNAME
+#   export FLENV_DB_PASSWORD
+#   export FLENV_GOTMS_BASEURL
+#   export FLENV_GOTMS_APIKEY
+#   export FLENV_GOTMS_USERNAME
+#   export FLENV_GOTMS_PASSWORD
+#   export FLENV_TMS_BASEURL
+#   export FLENV_TMS_RESTPATH
+#   export FLENV_TMS_CW_APIUSER
+#   export FLENV_TMS_CW_APIPASSWORD
+#   export FLENV_TMS_NEST_BASEURL
+#   export FLENV_RABBITMQ_BASEURL
+#   export FLENV_RABBITMQ_AUTHHEADER
+#
+#   ansible-vault encrypt "$ENVS_FILE" > /dev/null 2>&1
+#   gum log --level debug "FLENV Environments Set Successfully! (prefix: FLENV_*)"
+# }
 
 ##
 # Utility Function 

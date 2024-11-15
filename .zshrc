@@ -56,12 +56,7 @@ export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/node@20/include"
 # NPM_PACKAGES="${HOME}/.npm-packages"
 # export PATH="$PATH:$NPM_PACKAGES/bin"
 export PATH="$PATH:~/.local/bin/"
-# export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 export TERM=xterm-256color
-#### NVM Options
-# export NVM_DIR="$HOME/.nvm"
-#   [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
-#   [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"
 
 
 ##

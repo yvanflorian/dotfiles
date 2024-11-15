@@ -128,4 +128,18 @@ flenv_curl_get(){
 #
 # Load other custom/private scripts
 #
-source "$ZSH_WORK_DIR/private/work/index.sh"
+# source "$ZSH_WORK_DIR/private/work/index.sh"
+
+
+# Detect OS
+case "$(uname)" in
+  # Darwin*)
+  #   echo "MacOS"
+  #   ;;
+    
+  Linux*)
+    # Linux specific: Load Work Related stuff
+    echo "Linux"
+    source "$ZSH_WORK_DIR/private/work/index.sh"
+    ;;
+esac

@@ -14,7 +14,11 @@ setopt HIST_IGNORE_SPACE
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# Set up Homebrew environment 
+if command -v brew >/dev/null 2>&1; then
+    BREW_PATH=$(which brew)
+    eval "$($BREW_PATH shellenv)"
+fi
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(brew --prefix)/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -53,8 +57,6 @@ export TERM=xterm-256color
 export NVM_DIR="$HOME/.nvm"
   [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"
-
- #export SSL_CERT_FILE=/usr/local/share/ca-certificates/_.logistics.corp.crt
 
 
 ##

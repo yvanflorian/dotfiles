@@ -139,7 +139,6 @@ case "$(uname)" in
     
   Linux*)
     # Linux specific: Load Work Related stuff
-    echo "Linux"
     source "$ZSH_WORK_DIR/private/work/index.sh"
     ;;
 esac

@@ -41,11 +41,29 @@ alias cat="bat"
 alias catp="bat --style=plain"
 alias ls="eza --icons --all --long --ignore-glob='.git' --sort=modified --reverse"
 alias lsa="eza --icons --git-ignore --tree --ignore-glob='.git' | cat"
-alias clip="/mnt/c/Windows/System32/clip.exe"
-alias copy="tmux save-buffer - | clip"
 alias gst="git status"
 alias c="clear"
 alias batgo="bat --language go" 
+
+
+#
+# OS Specific Copy
+case "$(uname)" in
+  Darwin*)
+    # Your macOS specific configurations here
+    alias clip="pbcopy"
+    alias base64="gbase64"
+    alias copy="tmux show-buffer | pbcopy"
+    # Add more macOS specific stuff
+    ;;
+    
+  # WSL
+  Linux*)
+    alias clip="/mnt/c/Windows/System32/clip.exe"
+    alias copy="tmux save-buffer - | clip"
+    # Add more Linux specific stuff
+    ;;
+esac
 
 export TZ="Africa/Kampala"
 export EDITOR=nvim

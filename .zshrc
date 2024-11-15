@@ -30,7 +30,7 @@ bindkey '^ ' autosuggest-fetch
 alias catlarge="cat"
 alias cat="bat"
 alias catp="bat --style=plain"
-alias ls="eza --icons --all --long --ignore-glob='.git'"
+alias ls="eza --icons --all --long --ignore-glob='.git' --sort=modified --reverse"
 alias lsa="eza --icons --git-ignore --tree --ignore-glob='.git' | cat"
 alias clip="/mnt/c/Windows/System32/clip.exe"
 alias copy="tmux save-buffer - | clip"

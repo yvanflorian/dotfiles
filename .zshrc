@@ -17,8 +17,13 @@ bindkey '^n' history-search-forward
 # Set up Homebrew environment 
 if command -v brew >/dev/null 2>&1; then
     BREW_PATH=$(which brew)
-    eval "$($BREW_PATH shellenv)"
+    eval "$($BREW_PATH shellenv)" 
+    #### NVM Options 
+    export NVM_DIR="$HOME/.nvm"
+       [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
+       [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 fi
+
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(brew --prefix)/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -54,9 +59,9 @@ export PATH="$PATH:~/.local/bin/"
 # export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 export TERM=xterm-256color
 #### NVM Options
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"
+# export NVM_DIR="$HOME/.nvm"
+#   [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
+#   [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"
 
 
 ##

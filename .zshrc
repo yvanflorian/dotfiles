@@ -17,11 +17,14 @@ bindkey '^n' history-search-forward
 # Set up Homebrew environment 
 if command -v brew >/dev/null 2>&1; then
     BREW_PATH=$(which brew)
+    BREW_PREFIX=$(brew --prefix)
     eval "$($BREW_PATH shellenv)" 
     #### NVM Options 
     export NVM_DIR="$HOME/.nvm"
        [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
        [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+    #### libpq to path
+    export PATH="$BREW_PREFIX/opt/libpq/bin:$PATH"
 fi
 
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh

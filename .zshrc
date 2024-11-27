@@ -71,9 +71,9 @@ esac
 export TZ="Africa/Kampala"
 export EDITOR=nvim
 export ANSIBLE_CONFIG="$HOME/.config/ansible/ansible.cfg"
-export PATH="/home/linuxbrew/.linuxbrew/opt/node@20/bin:$PATH"
-export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/node@20/lib"
-export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/node@20/include"
+export PATH="/home/linuxbrew/.linuxbrew/opt/node@22/bin:$PATH"
+export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/node@22/lib"
+export CPPFLAGS="-I/home/linuxbrew/.linuxbrew/opt/node@22/include"
 # NPM_PACKAGES="${HOME}/.npm-packages"
 # export PATH="$PATH:$NPM_PACKAGES/bin"
 export PATH="$PATH:~/.local/bin/"

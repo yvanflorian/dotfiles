@@ -5,6 +5,7 @@ local opt = vim.opt
 opt.relativenumber = true
 opt.scrolloff = 8
 opt.incsearch = true
+opt.wrap = false
 
 local autocmd = vim.api.nvim_create_autocmd
 autocmd({ "BufRead", "BufNewFile" }, {

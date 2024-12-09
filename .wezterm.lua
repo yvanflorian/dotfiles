@@ -7,7 +7,7 @@ local config = {
 	color_scheme = "Chameleon (Gogh)",
 	font = wezterm.font("Iosevka Nerd Font", { weight = "Regular" }),
 	font_size = 16.45,
-	window_background_image = "/Users/yvanflorianremesha/horizon.jpg",
+	window_background_image = wezterm.config_dir .. "/horizon.jpg",
 	window_background_image_hsb = {
 		brightness = 0.15,
 		hue = 0.9,

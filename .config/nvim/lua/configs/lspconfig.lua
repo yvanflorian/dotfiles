@@ -88,3 +88,9 @@ lspconfig.terraformls.setup {
     completeUnimported = true,
   },
 }
+
+-- Overrid the lsp reference builtin that sends the
+-- LSP reference look up to quickfix by default
+vim.lsp.handlers["textDocument/references"] = function()
+  require("telescope.builtin").lsp_references()
+end

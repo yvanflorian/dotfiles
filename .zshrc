@@ -13,6 +13,8 @@ setopt HIST_IGNORE_SPACE
 
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
+# Bring process back to foreground with Ctrl-A
+bindkey -s '^A' 'fg\n'
 
 # Set up Homebrew environment 
 if command -v brew >/dev/null 2>&1; then

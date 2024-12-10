@@ -27,6 +27,7 @@ conf.defaults = {
 conf.pickers = {
   find_files = {
     find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*", "--glob", "!.deprecated/*" },
+    theme = "ivy",
   },
 }
 

@@ -6,6 +6,9 @@ local M = {
     typescript = {
       require("formatter.filetypes.typescript").prettier,
     },
+    typescriptreact = { -- Add this section
+      require("formatter.filetypes.typescriptreact").prettier,
+    },
     ["*"] = {
       require("formatter.filetypes.any").remove_trailing_whitespace,
     },
@@ -16,6 +19,7 @@ require("conform").setup {
   formatters_by_ft = {
     go = { "goimports" },
     javascript = { "prettier" },
+    typescript = { "prettier" },
   },
   format_on_save = {
     lsp_fallback = true,
@@ -79,5 +83,14 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     vim.lsp.buf.format()
   end,
 })
+
+-- Then add the autocommand for format on save
+-- vim.api.nvim_create_augroup("FormatAutogroup", { clear = true })
+-- vim.api.nvim_create_autocmd("BufWritePost", {
+--   group = "FormatAutogroup",
+--   callback = function()
+--     vim.cmd("FormatWrite")
+--   end,
+-- })
 
 return M

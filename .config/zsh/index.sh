@@ -133,9 +133,9 @@ flenv_curl_get(){
 
 # Detect OS
 case "$(uname)" in
-  # Darwin*)
-  #   echo "MacOS"
-  #   ;;
+  Darwin*)
+    source "$ZSH_WORK_DIR/private/novich/index.sh"
+    ;;
     
   Linux*)
     # Linux specific: Load Work Related stuff

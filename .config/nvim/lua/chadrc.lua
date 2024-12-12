@@ -4,9 +4,12 @@
 ---@type ChadrcConfig
 local M = {}
 
-M.ui = {
-  theme = "chadtain",
+M.base46 = {
   transparency = true,
+  theme = "chadtain",
+}
+
+M.ui = {
   statusline = {
     theme = "default",
     separator_style = "block",

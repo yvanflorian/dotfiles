@@ -27,22 +27,37 @@ end
 -- }
 
 -- typescript
-lspconfig.tsserver.setup {
+-- lspconfig.tsserver.setup {
+lspconfig.ts_ls.setup {
   on_attach = on_attach,
   on_init = on_init,
   capabilities = capabilities,
+  root_dir = lspconfig.util.root_pattern(
+    ".eslintrc",
+    ".eslintrc.js",
+    "package.json",
+    "tsconfig.json",
+    ".eslintrc.json"
+  ),
   -- init_options = {
   --   preferences = {
   --     disableSuggestions = true,
   --   },
   -- },
+  settings = {
+    workingDirectory = { mode = "auto" },
+    -- format = { enable = true },
+    lint = { enable = true },
+    -- Add this section to ignore minified files
+    ignorePatterns = { "**/*.min.js", "**/*.min.ts" },
+  },
 }
 
 lspconfig.eslint.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  filetypes = { "javascript", "javascriptreact", "typescript" },
-  root_dir = lspconfig.util.root_pattern(".eslintrc", ".eslintrc.js", ".eslintrc.json"),
+  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  root_dir = lspconfig.util.root_pattern(".eslintrc", "eslint.config.js", ".eslintrc.js", ".eslintrc.json"),
   settings = {
     workingDirectory = { mode = "auto" },
     -- format = { enable = true },

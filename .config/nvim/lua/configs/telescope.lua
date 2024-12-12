@@ -2,10 +2,11 @@ local conf = require "nvchad.configs.telescope"
 local actions = require "telescope.actions"
 
 conf.defaults = {
+  theme = "ivy",
   prompt_prefix = "    ",
   selection_caret = "󰋇 ",
   layout_config = {
-    prompt_position = "bottom",
+    prompt_position = "top",
   },
   mappings = {
     i = {
@@ -34,6 +35,12 @@ conf.pickers = {
     layout_config = {
       prompt_position = "top",
     },
+  },
+  live_grep = {
+    theme = "ivy",
+  },
+  git_commits = {
+    theme = "ivy",
   },
   buffers = {
     theme = "ivy",

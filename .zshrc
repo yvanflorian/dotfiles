@@ -116,3 +116,4 @@ esac
 # Go Binaries
 GOPATH="$(go env GOPATH)/bin"
 export PATH="$GOPATH:$PATH"
+export PATH="$HOME/.local/bin:$PATH"

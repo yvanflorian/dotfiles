@@ -13,6 +13,13 @@ autocmd({ "BufRead", "BufNewFile" }, {
   command = "set filetype=plsql",
 })
 
+autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*.go",
+  callback = function()
+    vim.opt_local.foldmethod = "indent"
+  end,
+})
+
 --- On opening of Neovim,
 --- Automatically open Telescope
 autocmd("VimEnter", {

@@ -1,6 +1,7 @@
 bindkey -v
 
 # cd "$HOME"
+#
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000

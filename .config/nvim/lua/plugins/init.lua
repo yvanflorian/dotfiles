@@ -26,7 +26,15 @@ return {
       require "configs.lspconfig"
     end,
   },
-
+  -- {
+  --   "hrsh7th/nvim-cmp",
+  --   opts = function()
+  --     return require "nvchad.configs.cmp"
+  --     -- local opts = require "plugins.configs.cmp"
+  --     -- local custom_opts = require "configs.cmp"
+  --     -- return vim.tbl_deep_extend("force", opts, custom_opts.cmp)
+  --   end,
+  -- },
   -- {
   -- 	"nvim-treesitter/nvim-treesitter",
   -- 	opts = {

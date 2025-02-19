@@ -35,13 +35,13 @@ conf.pickers = {
     theme = "ivy",
     layout_config = {
       prompt_position = "top",
-      height = 0.4,
+      --height = 0.4,
     },
   },
   live_grep = {
     theme = "ivy",
     layout_config = {
-      height = 0.3,
+      --height = 0.3,
     },
   },
   git_commits = {
@@ -53,7 +53,7 @@ conf.pickers = {
   lsp_references = {
     theme = "ivy",
     layout_config = {
-      height = 0.3,
+      --height = 0.3,
     },
   },
   buffers = {
@@ -62,7 +62,7 @@ conf.pickers = {
       prompt_position = "top",
       preview_width = 0.6,
       preview_cutoff = 0,
-      height = 0.3,
+      --height = 0.3,
     },
     -- remove completely borders
     borderchars = {

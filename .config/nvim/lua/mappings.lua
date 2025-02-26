@@ -11,6 +11,9 @@ map("n", "gd", "<cmd>Telescope lsp_definitions<CR>", { desc = "definitions" })
 map("n", "gr", "<cmd>Telescope lsp_references<CR>", { desc = "references" })
 map("n", "gz", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "diagnostic" })
 map("n", "<leader>fc", "<cmd>Telescope live_grep<CR>", { desc = "Live Grep" })
+map("n", "gs", function()
+  require("telescope.builtin").lsp_definitions { jump_type = "vsplit" }
+end, { desc = "definition in vsplit" })
 
 -- next/previous/delete buffer
 map("n", "<Tab>", "<cmd>bnext<CR>", { desc = "goto next buffer" })

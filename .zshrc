@@ -59,6 +59,7 @@ case "$(uname)" in
     alias clip="pbcopy"
     alias base64="gbase64"
     alias copy="tmux show-buffer | pbcopy"
+    alias uuidgen="uuidgen | tr '[:upper:]' '[:lower:]'"
     # Add more macOS specific stuff
     ;;
     

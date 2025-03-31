@@ -28,6 +28,13 @@ conf.defaults = {
     "--glob=!.git/*", -- This excludes the .git directory
     "--glob=!.deprecated/*", -- This excludes the .git directory
   },
+  buffer_previewer_maker = function(filepath, bufnr, opts)
+    -- Set fold method to manual in Telescope buffers
+    -- vim.api.nvim_win_set_option(0, "foldmethod", "manual")
+    vim.wo.foldmethod = "manual"
+    -- Call default previewer
+    require("telescope.previewers").buffer_previewer_maker(filepath, bufnr, opts)
+  end,
 }
 conf.pickers = {
   find_files = {

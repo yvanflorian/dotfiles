@@ -14,7 +14,7 @@ autocmd({ "BufRead", "BufNewFile" }, {
 })
 
 autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = { "*.go", "*.ts" },
+  pattern = { "*.go", "*.ts", "*.tsx", "javascript", "javascriptreact", "typescript", "typescriptreact" },
   callback = function()
     vim.opt_local.foldmethod = "indent"
   end,

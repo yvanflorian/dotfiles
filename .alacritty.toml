@@ -1,0 +1,53 @@
+# This is a basic example configuration file for Alacritty.
+# For more options and details, refer to the official documentation:
+# https://github.com/alacritty/alacritty
+
+
+# Font configuration (changes require restart)
+[font]
+size = 17.4
+
+[font.normal]
+family = "IosevkaTerm Nerd Font Propo"
+style = "ExtraLight"
+# style = "Regular"
+
+[font.bold]
+family = "Iosevka Nerd Font"
+style = "Regular"
+
+[window]
+opacity = 0.95
+decorations = "None"
+startup_mode = "Maximized"
+padding = { x = 5, y = 5 }
+option_as_alt = "Both"
+
+# Colors
+[colors]
+# Default colors
+[colors.primary]
+background = "#1d1f21"
+foreground = "#c5c8c6"
+
+# Normal colors
+[colors.normal]
+black = "#1d1f21"
+red = "#cc6666"
+green = "#b5bd68"
+yellow = "#f0c674"
+blue = "#81a2be"
+magenta = "#b294bb"
+cyan = "#8abeb7"
+white = "#c5c8c6"
+
+# Bright colors
+[colors.bright]
+black = "#666666"
+red = "#d54e53"
+green = "#b9ca4a"
+yellow = "#e7c547"
+blue = "#7aa6da"
+magenta = "#c397d8"
+cyan = "#70c0b1"
+white = "#eaeaea"

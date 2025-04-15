@@ -13,8 +13,8 @@ local config = {
 		hue = 0.9,
 		saturation = 0.8,
 	},
-	initial_rows = 1000,
-	initial_cols = 1000,
+	-- initial_rows = 1000,
+	-- initial_cols = 1000,
 }
 
 return config

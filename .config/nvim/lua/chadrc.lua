@@ -26,4 +26,6 @@ M.ui = {
 
 -- buffer full filename
 vim.cmd [[set winbar=%f]]
+--increments alphabet with g+Ctrl-a
+vim.opt.nrformats = vim.opt.nrformats + "alpha"
 return M

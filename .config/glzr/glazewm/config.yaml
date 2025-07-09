@@ -99,16 +99,34 @@ window_behavior:
 
 workspaces:
   - name: '1'
+    display_name: "1.edge"
   - name: '2'
+    display_name: "2.term"
   - name: '3'
+    display_name: "3.duck"
   - name: '4'
+    display_name: "4.mail"
   - name: '5'
+    display_name: "5.teams"
   - name: '6'
   - name: '7'
   - name: '8'
   - name: '9'
 
 window_rules:
+  - commands: ['move --workspace 4']
+    match:
+      # Move mail to workspace 4
+      - window_process: { equals: 'msedge' }
+        window_title: { regex: '.*Outlook.*'}
+  # - commands: ['move --workspace 1']
+  #   match:
+  #     # Move Normal Edge (not outlook) to workspace 1 always
+  #     - window_process: { equals: 'msedge' }
+        # window_title: { regex: '^(?!.*Outlook).*' }
+  - commands: ['move --workspace 5']
+    match:
+      - window_title: { equals: 'ms-teams' }
   - commands: ['ignore']
     match:
       # Ignores any Zebar windows.

@@ -3,6 +3,7 @@ vault
 **/.git/*
 .log
 .config/tmux/plugins
+**/.node_modules/*
 # */*.github/*
 # */*.gitignore
 # */lazy-lock.json

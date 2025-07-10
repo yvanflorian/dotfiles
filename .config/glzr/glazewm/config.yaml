@@ -124,9 +124,13 @@ window_rules:
   #     # Move Normal Edge (not outlook) to workspace 1 always
   #     - window_process: { equals: 'msedge' }
         # window_title: { regex: '^(?!.*Outlook).*' }
+  - commands: ['move --workspace 3']
+    match:
+      # Move DuckDuckGo browser to workspace 3
+      - window_process: { equals: 'DuckDuckGo' }
   - commands: ['move --workspace 5']
     match:
-      - window_title: { equals: 'ms-teams' }
+      - window_title: { equals: 'ms-teams' }  
   - commands: ['ignore']
     match:
       # Ignores any Zebar windows.

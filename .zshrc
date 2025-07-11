@@ -51,7 +51,7 @@ alias c="clear"
 alias batgo="bat --language go" 
 
 alias uuidv7="npx uuidv7"
-
+alias vim="nvim"
 #
 # OS Specific Copy
 case "$(uname)" in

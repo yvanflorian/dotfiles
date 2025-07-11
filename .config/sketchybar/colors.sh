@@ -13,7 +13,9 @@ GREY=0xff939ab7
 TRANSPARENT=0x00000000
 
 # General bar colors
-BAR_COLOR=0xcc24273a #$GREY # Grey bar
+# BAR_COLOR=0xcc24273a #$GREY # Grey bar
+# BAR_COLOR=0xcc0f1419 #$DARKGREY # Grey bar
+BAR_COLOR=0xcc0a0c10 #$GREY # Grey bar
 ICON_COLOR=$WHITE # Color of all icons
 LABEL_COLOR=$WHITE # Color of all labels
 

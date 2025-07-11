@@ -12,8 +12,8 @@ sketchybar --add item        cpu.top right                  \
            --set cpu.percent label.font="$FONT:Heavy:12"    \
                              label=CPU                      \
                              icon.drawing=off               \
-                             update_freq=2                  \
-                             mach_helper="$HELPER"          \
+                             update_freq=10                  \
+                             script="$PLUGIN_DIR/cpu.sh"          \
                              background.padding_right=20    \
                                                             \
            --add graph       cpu.sys right 55               \

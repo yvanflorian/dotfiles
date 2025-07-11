@@ -36,9 +36,9 @@ gaps:
 
   # Gap between windows and the screen edge.
   outer_gap:
-    top: '40px'
+    top: '35px'
     right: '5px'
-    bottom: '10px'
+    bottom: '5px'
     left: '5px'
 
 window_effects:
@@ -99,9 +99,9 @@ window_behavior:
 
 workspaces:
   - name: '1'
-    display_name: "1.edge"
+    display_name: "1.term"
   - name: '2'
-    display_name: "2.term"
+    display_name: "2.edge"
   - name: '3'
     display_name: "3.duck"
   - name: '4'

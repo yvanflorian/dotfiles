@@ -69,7 +69,7 @@ conf.pickers = {
       prompt_position = "top",
       preview_width = 0.6,
       preview_cutoff = 0,
-      --height = 0.3,
+      height = 0.3,
     },
     -- remove completely borders
     borderchars = {

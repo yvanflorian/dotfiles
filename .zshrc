@@ -119,3 +119,9 @@ esac
 GOPATH="$(go env GOPATH)/bin"
 export PATH="$GOPATH:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+source "$HOME/.config/op/plugins.sh"
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=("$HOME/.docker/completions" $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions

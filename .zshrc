@@ -119,3 +119,8 @@ esac
 GOPATH="$(go env GOPATH)/bin"
 export PATH="$GOPATH:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+
+json_stringify(){
+  echo "$1" | jq -R .
+}
+alias vimt="NVIM_APPNAME=nvim-kickstart nvim"

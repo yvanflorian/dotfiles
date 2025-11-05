@@ -126,7 +126,6 @@ autoload -Uz compinit
 compinit
 # End of Docker CLI completions
 
-<<<<<<< HEAD
 # Enable case-insensitive completion
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH

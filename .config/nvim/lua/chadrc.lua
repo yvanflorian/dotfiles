@@ -6,7 +6,7 @@ local M = {}
 
 M.base46 = {
   transparency = true,
-  theme = "chadtain",
+  theme = "tomorrow_night",
 }
 
 M.ui = {

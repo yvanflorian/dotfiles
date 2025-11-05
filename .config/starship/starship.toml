@@ -19,3 +19,8 @@ when = "test -n \"$FLENV_STAGE_ENVIRONMENT\""
 style = "bold yellow"
 format = "[<flenv:$output>]($style) "
 
+[custom.tmsmono_loaded]
+command = "echo $BITZYENV"
+when = "test -n \"$BITZYENV\""
+style = "bold yellow"
+format = "[<bitzytms:$output>]($style) "

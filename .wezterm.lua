@@ -5,6 +5,7 @@ local config = {
 	window_decorations = "RESIZE",
 	-- default_prog = { "wsl", "su", "yvanflorian" },
 	color_scheme = "Chameleon (Gogh)",
+	-- color_scheme = "Gruvbox dark, soft (base16)",
 	font = wezterm.font("Iosevka Nerd Font", { weight = "Regular" }),
 	font_size = 16.45,
 	window_background_image = wezterm.config_dir .. "/horizon.jpg",

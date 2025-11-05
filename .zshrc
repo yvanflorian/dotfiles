@@ -125,3 +125,19 @@ fpath=("$HOME/.docker/completions" $fpath)
 autoload -Uz compinit
 compinit
 # End of Docker CLI completions
+
+# Enable case-insensitive completion
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
+
+# Configure completion style for make
+zstyle ':completion:*:make:*' tag-order 'targets'
+# Fuzzy search through make targets
+#
+# PNPM
+export PNPM_HOME="$HOME/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"

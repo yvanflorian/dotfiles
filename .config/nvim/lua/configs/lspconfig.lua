@@ -88,6 +88,13 @@ lspconfig.gopls.setup {
       gofumpt = true,
       analyses = {
         unusedparams = true,
+        unusedwrite = true,
+        shadow = true,
+        nilness = true,
+        fieldalignment = false, -- Often too noisy
+        -- Disable comment-related checks
+        packagecomment = false, -- No package comment requirement
+        commentFormatting = false, -- Less strict about comment formatting
       },
     },
   },

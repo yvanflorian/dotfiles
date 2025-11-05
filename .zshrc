@@ -126,6 +126,7 @@ autoload -Uz compinit
 compinit
 # End of Docker CLI completions
 
+<<<<<<< HEAD
 # Enable case-insensitive completion
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
@@ -141,3 +142,7 @@ zstyle ':completion:*:make:*' tag-order 'targets'
 # PNPM
 export PNPM_HOME="$HOME/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
+json_stringify(){
+  echo "$1" | jq -R .
+}
+alias vimt="NVIM_APPNAME=nvim-kickstart nvim"

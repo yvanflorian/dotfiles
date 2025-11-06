@@ -17,7 +17,10 @@ vim.o.wrap = false
 
 --tab width to 2
 vim.o.tabstop = 2
+vim.o.softtabstop = 2
 vim.o.shiftwidth = 2
+vim.o.smartindent = true
+vim.o.expandtab = true
 -- Enable transparency
 
 -- Sync clipboard between OS and Neovim.
@@ -56,6 +59,8 @@ vim.o.winbar = "%f"
 vim.o.statusline = ""
 vim.o.laststatus = 0
 
+vim.opt.nrformats:append("alpha")
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
@@ -67,6 +72,9 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 vim.keymap.set("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Go to next buffer" })
 vim.keymap.set("n", "<S-Tab>", "<cmd>bprev<CR>", { desc = "Go to previous buffer" })
 vim.keymap.set("n", "<leader>x", "<cmd>bdelete<CR>", { desc = "Close current buffer" })
+
+-- my own for comment
+vim.keymap.set("n", "<leader>/", "gcc", { desc = "Toggle line comment", remap = true })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -87,6 +95,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	pattern = "*.vw",
 	command = "set filetype=sql",
+})
+
+--Indent foldmethods
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = { "*.go", "*.ts", "*.tsx", "*.js", "*.jsx" },
+	callback = function()
+		vim.opt_local.foldmethod = "indent"
+	end,
 })
 
 -- [[ Install `lazy.nvim` plugin manager ]]
@@ -294,8 +310,12 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "[ ] Find existing buffers" })
 			vim.keymap.set("n", "<leader>gt", builtin.git_status, { desc = "Git status" })
 
+			-- my own definition in vsplit
+			vim.keymap.set("n", "gs", function()
+				require("telescope.builtin").lsp_definitions({ jump_type = "vsplit" })
+			end, { desc = "Definition in vsplit" })
 			-- Slightly advanced example of overriding default behavior and theme
-			vim.keymap.set("n", "<leader>/", function()
+			vim.keymap.set("n", "<leader>cb", function()
 				-- You can pass additional configuration to Telescope to change the theme, layout, etc.
 				builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
 					winblend = 10,
@@ -366,6 +386,9 @@ require("lazy").setup({
 					-- Dark gray comments (choose one of the options above)
 					["@comment"] = { fg = "#7c6f64", italic = false },
 					Comment = { fg = "#7c6f64", italic = false },
+
+					--Folded
+					Folded = { bg = "#7c6f64", fg = "#1d2021" },
 				},
 			})
 
@@ -501,11 +524,19 @@ require("lazy").setup({
 				css = { "prettier" },
 				html = { "prettier" },
 				typescriptreact = { "prettier" },
+				javascriptreact = { "prettier" },
+				typescript = { "prettier" },
+				go = { "goimports" },
 				-- Conform can also run multiple formatters sequentially
 				-- python = { "isort", "black" },
 				--
 				-- You can use 'stop_after_first' to run the first available formatter from the list
 				-- javascript = { "prettierd", "prettier", stop_after_first = true },
+			},
+			formatters = {
+				prettier = {
+					prepend_args = { "--config", vim.fn.expand("~/.config/prettier/.prettierrc.json") },
+				},
 			},
 		},
 	},
@@ -731,27 +762,27 @@ require("lazy").setup({
 
 					-- Rename the variable under your cursor.
 					--  Most Language Servers support renaming across files, etc.
-					map("grn", vim.lsp.buf.rename, "[R]e[n]ame")
+					map("<leader>af", vim.lsp.buf.rename, "[R]e[n]ame")
 
 					-- Execute a code action, usually your cursor needs to be on top of an error
 					-- or a suggestion from your LSP for this to activate.
-					map("gra", vim.lsp.buf.code_action, "[G]oto Code [A]ction", { "n", "x" })
+					map("<leader>bca", vim.lsp.buf.code_action, "[G]oto Code [A]ction", { "n", "x" })
 
 					-- Find references for the word under your cursor.
-					map("grr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+					map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 
 					-- Jump to the implementation of the word under your cursor.
 					--  Useful when your language has ways of declaring types without an actual implementation.
-					map("gri", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+					map("gi", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 
 					-- Jump to the definition of the word under your cursor.
 					--  This is where a variable was first declared, or where a function is defined, etc.
 					--  To jump back, press <C-t>.
-					map("grd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+					map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
 
 					-- WARN: This is not Goto Definition, this is Goto Declaration.
 					--  For example, in C this would take you to the header.
-					map("grD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+					map("<leader>bd", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
 					-- Fuzzy find all the symbols in your current document.
 					--  Symbols are things like variables, functions, types, etc.
@@ -877,8 +908,59 @@ require("lazy").setup({
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
 				-- clangd = {},
-				gopls = {},
-				ts_ls = {},
+				gopls = {
+					cmd = { "gopls", "-remote=auto" },
+					filetypes = { "go", "gomod", "gowork", "gotmpl" },
+					-- rootdir = util.root_pattern("go.work","go.mod",".git"),
+					settings = {
+						gopls = {
+							completeUnimported = true,
+							usePlaceholders = true,
+							staticcheck = true,
+							gofumpt = true,
+							analyses = {
+								unusedparams = true,
+								unusedwrite = true,
+								shadow = true,
+								nilness = true,
+								fieldalignment = false, -- Often too noisy
+								-- Disable comment-related checks
+								packagecomment = false, -- No package comment requirement
+								commentFormatting = false, -- Less strict about comment formatting
+							},
+						},
+					},
+				},
+				ts_ls = {
+					root_dir = require("lspconfig").util.root_pattern(
+						".eslintrc",
+						".eslintrc.js",
+						"package.json",
+						"tsconfig.json",
+						".eslintrc.json"
+					),
+					settings = {
+						workingDirectory = { mode = "auto" },
+						lint = { enable = true },
+						ignorePatterns = { "**/*.min.js", "**/*.min.ts" },
+					},
+				},
+				eslint = {
+					filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+					root_dir = require("lspconfig").util.root_pattern(
+						".eslintrc",
+						"eslint.config.js",
+						".eslintrc.js",
+						".eslintrc.json"
+					),
+					settings = {
+						workingDirectory = { mode = "auto" },
+						-- format = { enable = true },
+						lint = { enable = true },
+						-- Add this section to ignore minified files
+						ignorePatterns = { "**/*.min.js", "**/*.min.ts" },
+					},
+				},
 				-- pyright = {},
 				-- rust_analyzer = {},
 				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -1029,4 +1111,28 @@ require("lazy").setup({
 			lazy = "💤 ",
 		},
 	},
+})
+
+--autoformat and organizeImports golang on save
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+	pattern = "*.go",
+	callback = function()
+		local params = vim.lsp.util.make_range_params()
+		params.context = { only = { "source.organizeImports" } }
+		-- buf_request_sync defaults to a 1000ms timeout. Depending on your
+		-- machine and codebase, you may want longer. Add an additional
+		-- argument after params if you find that you have to write the file
+		-- twice for changes to be saved.
+		-- E.g., vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 3000)
+		local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
+		for cid, res in pairs(result or {}) do
+			for _, r in pairs(res.result or {}) do
+				if r.edit then
+					local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
+					vim.lsp.util.apply_workspace_edit(r.edit, enc)
+				end
+			end
+		end
+		-- vim.lsp.buf.format({async = false})
+	end,
 })

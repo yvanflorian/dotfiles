@@ -235,11 +235,37 @@ require("lazy").setup({
 				-- You can put your default mappings / updates / etc. in here
 				--  All the info you're looking for is in `:help telescope.setup()`
 				--
-				-- defaults = {
-				--   mappings = {
-				--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-				--   },
-				-- },
+				defaults = {
+					theme = "ivy",
+					prompt_prefix = "    ",
+					selection_caret = "󰋇 ",
+					layout_config = {
+						prompt_position = "top",
+						height = 0.3,
+					},
+					mappings = {
+						i = {
+							["<Esc>"] = require("telescope.actions").close,
+							["<C-j>"] = require("telescope.actions").move_selection_next,
+							["<C-r>"] = require("telescope.actions").delete_buffer,
+							--	+ require("telescope.actions").move_to_top, --delete buffer
+							["<C-v>"] = require("telescope.actions").file_vsplit,
+							["<C-s>"] = require("telescope.actions").select_all,
+						},
+					},
+					vimgrep_arguments = {
+						"rg",
+						"--color=never",
+						"--no-heading",
+						"--with-filename",
+						"--line-number",
+						"--column",
+						"--smart-case",
+						"--hidden", -- This allows searching in hidden files
+						"--glob=!.git/*", -- This excludes the .git directory
+						"--glob=!.deprecated/*", -- This excludes the .git directory
+					},
+				},
 				pickers = {
 					find_files = {
 						find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*", "--glob", "!.deprecated/*" },

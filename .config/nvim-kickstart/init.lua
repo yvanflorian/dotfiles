@@ -76,6 +76,13 @@ vim.keymap.set("n", "<leader>x", "<cmd>bdelete<CR>", { desc = "Close current buf
 -- my own for comment
 vim.keymap.set("n", "<leader>/", "gcc", { desc = "Toggle line comment", remap = true })
 
+-- Navigate quickfix list
+vim.keymap.set("n", "]q", ":cnext<CR>", { desc = "Next quickfix" })
+vim.keymap.set("n", "[q", ":cprev<CR>", { desc = "Previous quickfix" })
+
+--Diagnostics
+vim.keymap.set("n", "gz", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "diagnostics" })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -250,6 +257,7 @@ require("lazy").setup({
 							["<C-r>"] = require("telescope.actions").delete_buffer,
 							--	+ require("telescope.actions").move_to_top, --delete buffer
 							["<C-v>"] = require("telescope.actions").file_vsplit,
+							["<C-h>"] = require("telescope.actions").file_split,
 							["<C-s>"] = require("telescope.actions").select_all,
 						},
 					},
@@ -962,6 +970,8 @@ require("lazy").setup({
 					root_dir = require("lspconfig").util.root_pattern(
 						".eslintrc",
 						".eslintrc.js",
+						".eslint.config.js",
+						"eslint.config.js",
 						"package.json",
 						"tsconfig.json",
 						".eslintrc.json"

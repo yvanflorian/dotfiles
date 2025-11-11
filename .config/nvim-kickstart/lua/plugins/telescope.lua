@@ -98,6 +98,20 @@ return {
 					git_commits = {
 						theme = "ivy",
 					},
+					git_bcommits = {
+						theme = "ivy",
+						layout_config = {
+							height = 0.8,
+						},
+						git_command = {
+							"git",
+							"log",
+							"--pretty=%h %ad %an %s",
+							"--date=iso", -- 2024-11-11 14:30:25 +0300
+							-- "--date=short", -- or "relative", "iso", "format:%Y-%m-%d %H:%M"
+							"--follow", -- Follow file renames
+						},
+					},
 					git_status = {
 						theme = "ivy",
 					},
@@ -147,8 +161,9 @@ return {
 			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 			vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
 			vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-			vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "[ ] Find existing buffers" })
-			vim.keymap.set("n", "<leader>gt", builtin.git_status, { desc = "Git status" })
+			vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "[ ] Find existing [b]uffers" })
+			vim.keymap.set("n", "<leader>gt", builtin.git_status, { desc = "[G]it s[t]atus" })
+			vim.keymap.set("n", "<leader>gl", builtin.git_bcommits, { desc = "[G]it [L]og this one file" })
 
 			-- my own definition in vsplit
 			vim.keymap.set("n", "gs", function()

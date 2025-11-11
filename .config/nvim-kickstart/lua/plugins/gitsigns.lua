@@ -17,7 +17,8 @@ return {
 				-- Navigation keymaps
 				vim.keymap.set("n", "]h", gs.next_hunk, { buffer = bufnr, desc = "Next Hunk" })
 				vim.keymap.set("n", "[h", gs.prev_hunk, { buffer = bufnr, desc = "Prev Hunk" })
-				vim.keymap.set("n", "]dt", gs.diffthis, { buffer = bufnr, desc = "Diff this file" })
+				vim.keymap.set("n", "<leader>gd", gs.diffthis, { buffer = bufnr, desc = "[d]iff this file" })
+				vim.keymap.set("n", "<leader>gp", gs.preview_hunk, { buffer = bufnr, desc = "[P]review hunk" })
 			end,
 		},
 	},

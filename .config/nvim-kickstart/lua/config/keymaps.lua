@@ -24,8 +24,8 @@ vim.keymap.set("n", "[q", ":cprev<CR>", { desc = "Previous quickfix" })
 vim.keymap.set("n", "gz", "<cmd>lua vim.diagnostic.open_float()<CR>", { desc = "diagnostics" })
 
 -- Resize splits
-vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<CR>", { silent = true })
-vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<CR>", { silent = true })
+vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize -2<CR>", { silent = true })
+vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize +2<CR>", { silent = true })
 vim.keymap.set("n", "<C-Up>", "<cmd>resize +2<CR>", { silent = true })
 vim.keymap.set("n", "<C-Down>", "<cmd>resize -2<CR>", { silent = true })
 

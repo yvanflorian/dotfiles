@@ -401,6 +401,22 @@ require("lazy").setup({
 		end,
 	},
 	{
+		"rose-pine/neovim",
+		name = "rose-pine",
+		config = function()
+			require("rose-pine").setup({
+				dark_variant = "moon",
+
+				styles = {
+					bold = true,
+					italic = true,
+					transparency = true, -- Enable transparency here!
+				},
+			})
+			--vim.cmd("colorscheme rose-pine")
+		end,
+	},
+	{
 		"ellisonleao/gruvbox.nvim",
 		priority = 1000,
 		config = function()
@@ -422,7 +438,9 @@ require("lazy").setup({
 					Comment = { fg = "#7c6f64", italic = false },
 
 					--Folded
-					Folded = { bg = "#7c6f64", fg = "#1d2021" },
+					-- Folded = { bg = "#7c6f64", fg = "#1d2021" },
+
+					Folded = { bg = "#3c3836", fg = "#928374" },
 				},
 			})
 

@@ -44,7 +44,6 @@ return {
 
 			local entry_display = require("telescope.pickers.entry_display")
 			local make_entry = require("telescope.make_entry")
-			local sorters = require("telescope.sorters")
 
 			--
 			-- Custom entry maker

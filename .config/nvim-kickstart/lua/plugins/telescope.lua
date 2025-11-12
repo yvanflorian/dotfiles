@@ -42,6 +42,43 @@ return {
 			-- Telescope picker. This is really useful to discover what Telescope can
 			-- do as well as how to actually do it!
 
+			local entry_display = require("telescope.pickers.entry_display")
+			local make_entry = require("telescope.make_entry")
+			local sorters = require("telescope.sorters")
+
+			--
+			-- Custom entry maker
+			-- to display date last modified and the line number
+			local function make_grep_entry_with_mtime(opts)
+				local displayer = entry_display.create({
+					separator = " │ ",
+					items = {
+						{ width = 16 }, -- Date
+						{ width = 6 }, -- Line number
+						{ remaining = true }, -- Filename
+					},
+				})
+
+				local make_display = function(entry)
+					local stat = vim.loop.fs_stat(entry.filename)
+					local mtime = stat and os.date("%Y-%m-%d %H:%M", stat.mtime.sec) or "unknown"
+
+					return displayer({
+						{ mtime, "TelescopeResultsComment" },
+						{ tostring(entry.lnum), "TelescopeResultsLineNr" },
+						entry.filename,
+					})
+				end
+
+				return function(entry)
+					local base = make_entry.gen_from_vimgrep(opts)(entry)
+					if base then
+						base.display = make_display
+					end
+					return base
+				end
+			end
+
 			-- [[ Configure Telescope ]]
 			-- See `:help telescope` and `:help telescope.setup()`
 			require("telescope").setup({
@@ -52,6 +89,7 @@ return {
 					theme = "ivy",
 					prompt_prefix = "    ",
 					selection_caret = "󰋇 ",
+					layout_strategy = "bottom_pane",
 					layout_config = {
 						prompt_position = "top",
 						height = 0.3,
@@ -78,6 +116,8 @@ return {
 						"--hidden", -- This allows searching in hidden files
 						"--glob=!.git/*", -- This excludes the .git directory
 						"--glob=!.deprecated/*", -- This excludes the .git directory
+						"--sortr",
+						"modified", -- Sort by last modified time (newest first would be --sortr modified)
 					},
 				},
 				pickers = {
@@ -114,6 +154,9 @@ return {
 					},
 					git_status = {
 						theme = "ivy",
+					},
+					colorscheme = {
+						enable_preview = true, -- Preview the colorscheme before applying
 					},
 					lsp_references = {
 						theme = "ivy",
@@ -156,7 +199,15 @@ return {
 			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[S]earch [F]iles" })
 			vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
 			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-			vim.keymap.set("n", "<leader>fc", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+			-- vim.keymap.set("n", "<leader>fc", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+
+			-- Grep with dates
+			vim.keymap.set("n", "<leader>fc", function()
+				builtin.live_grep({
+					entry_maker = make_grep_entry_with_mtime(),
+					prompt_title = "Search by grep",
+				})
+			end, { desc = "Grep with dates" })
 			vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[S]earch [B]uffers" })
 			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 			vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
@@ -164,6 +215,7 @@ return {
 			vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "[ ] Find existing [b]uffers" })
 			vim.keymap.set("n", "<leader>gt", builtin.git_status, { desc = "[G]it s[t]atus" })
 			vim.keymap.set("n", "<leader>gl", builtin.git_bcommits, { desc = "[G]it [L]og this one file" })
+			vim.keymap.set("n", "<leader>th", builtin.colorscheme, { desc = "Preview [Th]emes" })
 
 			-- my own definition in vsplit
 			vim.keymap.set("n", "gs", function()

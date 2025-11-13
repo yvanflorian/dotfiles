@@ -78,6 +78,7 @@ return {
 				end
 			end
 
+			-- Function to live grep files with a given glob_pattern (extension like .go, .ts)
 			local function live_grep_with_glob()
 				local builtin = require("telescope.builtin")
 
@@ -91,7 +92,7 @@ return {
 						builtin.live_grep({
 							glob_pattern = pattern ~= "*" and pattern or nil,
 							entry_maker = make_grep_entry_with_mtime(), -- Your custom entry maker
-							prompt_title = pattern ~= "*" and ("Grep in " .. pattern) or "Live Grep",
+							prompt_title = pattern ~= "*" and ("Live Grep in " .. pattern) or "Live Grep",
 						})
 					end
 				end)
@@ -121,31 +122,9 @@ return {
 							["<C-v>"] = require("telescope.actions").file_vsplit,
 							["<C-h>"] = require("telescope.actions").file_split,
 							["<C-s>"] = require("telescope.actions").select_all,
-							-- Add a key to prompt for additional args
-							["<C-g>"] = function(prompt_bufnr)
-								local current_picker =
-									require("telescope.actions.state").get_current_picker(prompt_bufnr)
-								local current_query = current_picker:_get_prompt()
-
-								-- Prompt user for glob pattern
-								vim.ui.input({ prompt = "Glob pattern (e.g., *.ts): " }, function(input)
-									if input then
-										-- Close current picker
-										require("telescope.actions").close(prompt_bufnr)
-
-										-- Reopen with glob filter
-
-										-- Schedule reopen AFTER close completes
-										vim.schedule(function()
-											require("telescope.builtin").live_grep({
-												glob_pattern = input,
-												default_text = current_query,
-												prompt_title = "Grep in " .. input,
-											})
-										end)
-									end
-								end)
-							end,
+							-- Shift-q for selected-list to be sent to quick-fix
+							["<S-q>"] = require("telescope.actions").send_selected_to_qflist
+								+ require("telescope.actions").open_qflist,
 						},
 					},
 					vimgrep_arguments = {
@@ -254,7 +233,7 @@ return {
 			vim.keymap.set("n", "<leader>fg", function()
 				builtin.live_grep({
 					entry_maker = make_grep_entry_with_mtime(),
-					prompt_title = "[Find] files with rip[g]rep",
+					prompt_title = "Live Grep",
 				})
 			end, { desc = "[Find] files with rip[g]rep" })
 			vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[S]earch [B]uffers" })

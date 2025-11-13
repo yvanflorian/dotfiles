@@ -297,6 +297,9 @@ return {
 							completion = {
 								callSnippet = "Replace",
 							},
+							runtime = {
+								version = "LuaJIT", -- Neovim uses LuaJIT
+							},
 							diagnostics = {
 								globals = { "vim" }, -- Recognize 'vim' as a valid global
 							},

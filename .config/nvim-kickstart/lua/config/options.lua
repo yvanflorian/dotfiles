@@ -13,6 +13,7 @@ vim.o.softtabstop = 2
 vim.o.shiftwidth = 2
 vim.o.smartindent = true
 vim.o.expandtab = true
+vim.o.winborder = "rounded"
 -- Enable transparency
 
 -- Sync clipboard between OS and Neovim.

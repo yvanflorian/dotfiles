@@ -59,7 +59,7 @@ return {
 				})
 
 				local make_display = function(entry)
-					local stat = vim.loop.fs_stat(entry.filename)
+					local stat = vim.uv.fs_stat(entry.filename)
 					local mtime = stat and os.date("%Y-%m-%d %H:%M", stat.mtime.sec) or "unknown"
 
 					return displayer({
@@ -76,6 +76,25 @@ return {
 					end
 					return base
 				end
+			end
+
+			local function live_grep_with_glob()
+				local builtin = require("telescope.builtin")
+
+				-- First, ask for glob pattern
+				vim.ui.input({
+					prompt = "File pattern (e.g., *.ts, *.lua) or leave empty: ",
+					default = "*",
+				}, function(pattern)
+					if pattern then
+						-- Then open live_grep with that pattern
+						builtin.live_grep({
+							glob_pattern = pattern ~= "*" and pattern or nil,
+							entry_maker = make_grep_entry_with_mtime(), -- Your custom entry maker
+							prompt_title = pattern ~= "*" and ("Grep in " .. pattern) or "Live Grep",
+						})
+					end
+				end)
 			end
 
 			-- [[ Configure Telescope ]]
@@ -102,6 +121,31 @@ return {
 							["<C-v>"] = require("telescope.actions").file_vsplit,
 							["<C-h>"] = require("telescope.actions").file_split,
 							["<C-s>"] = require("telescope.actions").select_all,
+							-- Add a key to prompt for additional args
+							["<C-g>"] = function(prompt_bufnr)
+								local current_picker =
+									require("telescope.actions.state").get_current_picker(prompt_bufnr)
+								local current_query = current_picker:_get_prompt()
+
+								-- Prompt user for glob pattern
+								vim.ui.input({ prompt = "Glob pattern (e.g., *.ts): " }, function(input)
+									if input then
+										-- Close current picker
+										require("telescope.actions").close(prompt_bufnr)
+
+										-- Reopen with glob filter
+
+										-- Schedule reopen AFTER close completes
+										vim.schedule(function()
+											require("telescope.builtin").live_grep({
+												glob_pattern = input,
+												default_text = current_query,
+												prompt_title = "Grep in " .. input,
+											})
+										end)
+									end
+								end)
+							end,
 						},
 					},
 					vimgrep_arguments = {
@@ -195,18 +239,24 @@ return {
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[S]earch [F]iles" })
+			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
 			vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
 			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 			-- vim.keymap.set("n", "<leader>fc", builtin.live_grep, { desc = "[S]earch by [G]rep" })
 
+			vim.keymap.set(
+				"n",
+				"<leader>fG",
+				live_grep_with_glob,
+				{ desc = "[F]ind files with grep with [G]lob patterns (specify file extension)" }
+			)
 			-- Grep with dates
-			vim.keymap.set("n", "<leader>fc", function()
+			vim.keymap.set("n", "<leader>fg", function()
 				builtin.live_grep({
 					entry_maker = make_grep_entry_with_mtime(),
-					prompt_title = "Search by grep",
+					prompt_title = "[Find] files with rip[g]rep",
 				})
-			end, { desc = "Grep with dates" })
+			end, { desc = "[Find] files with rip[g]rep" })
 			vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[S]earch [B]uffers" })
 			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 			vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })

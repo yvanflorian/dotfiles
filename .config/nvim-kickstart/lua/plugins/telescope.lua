@@ -144,7 +144,17 @@ return {
 				},
 				pickers = {
 					find_files = {
-						find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*", "--glob", "!.deprecated/*" },
+						find_command = {
+							"rg",
+							"--files",
+							"--hidden",
+							"--glob",
+							"!.git/*",
+							"--glob",
+							"!.deprecated/*",
+							"--sortr",
+							"modified", -- Sort by last modified time (newest first would be --sortr modified)
+						},
 						theme = "ivy",
 						layout_config = {
 							prompt_position = "top",

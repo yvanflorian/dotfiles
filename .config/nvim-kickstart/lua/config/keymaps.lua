@@ -34,3 +34,25 @@ vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to window below" })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to window above" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
+
+-- Toggle minimal syntax highlighting (disables treesitter + LSP semantic tokens)
+vim.keymap.set("n", "<leader>ts", function()
+	local bufnr = vim.api.nvim_get_current_buf()
+
+	-- Check if treesitter highlight is active
+	local ts_active = vim.treesitter.highlighter.active[bufnr] ~= nil
+
+	if ts_active then
+		vim.cmd("TSBufDisable highlight")
+		for _, client in ipairs(vim.lsp.get_clients({ bufnr = bufnr })) do
+			vim.lsp.semantic_tokens.stop(bufnr, client.id)
+		end
+		print("Minimal syntax highlighting")
+	else
+		vim.cmd("TSBufEnable highlight")
+		for _, client in ipairs(vim.lsp.get_clients({ bufnr = bufnr })) do
+			vim.lsp.semantic_tokens.start(bufnr, client.id)
+		end
+		print("Full syntax highlighting")
+	end
+end, { desc = "Toggle Minimal syntax highlighting" })

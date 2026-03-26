@@ -145,4 +145,4 @@ export PATH="$PNPM_HOME:$PATH"
 json_stringify(){
   echo "$1" | jq -R .
 }
-alias vimt="NVIM_APPNAME=nvim-kickstart nvim"
+alias vim="NVIM_APPNAME=nvim-kickstart nvim"

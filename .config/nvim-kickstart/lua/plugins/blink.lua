@@ -17,6 +17,11 @@ return {
 					end
 					return "make install_jsregexp"
 				end)(),
+				config = function()
+					require("luasnip.loaders.from_vscode").load_standalone({
+						path = vim.fn.expand("~/.config/nvim-kickstart/lua/snippets/plsqljs.code-snippets"),
+					})
+				end,
 				dependencies = {
 					-- `friendly-snippets` contains a variety of premade snippets.
 					--    See the README about individual language/framework/plugin snippets:
@@ -74,6 +79,11 @@ return {
 				-- By default, you may press `<c-space>` to show the documentation.
 				-- Optionally, set `auto_show = true` to show the documentation after a delay.
 				documentation = { auto_show = false, auto_show_delay_ms = 500 },
+				menu = {
+					snippet = {
+						preview = true,
+					},
+				},
 			},
 
 			sources = {

@@ -15,8 +15,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 --
 -- Set filetype for .vw files to SQL
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-	pattern = "*.vw",
+	pattern = { "*.vw" },
 	command = "set filetype=sql",
+})
+
+-- Set filetype for .pkb and .pks files to plsql
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = { "*.pkb", "*.pks", "*.tab" },
+	command = "set filetype=plsql",
 })
 
 --Indent foldmethods

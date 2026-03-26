@@ -56,3 +56,8 @@ vim.keymap.set("n", "<leader>ts", function()
 		print("Full syntax highlighting")
 	end
 end, { desc = "Toggle Minimal syntax highlighting" })
+
+-- Copy file p ath to the clipboard
+vim.keymap.set("n", "<leader>cp", function()
+	vim.fn.setreg("+", vim.fn.expand("%:p"))
+end, { desc = "Copy file path to clipboard" })

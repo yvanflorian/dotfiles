@@ -74,7 +74,7 @@ case "$(uname)" in
 esac
 
 export TZ="Africa/Kampala"
-export EDITOR=nvim
+export EDITOR="env NVIM_APPNAME=nvim-kickstart nvim"
 export ANSIBLE_CONFIG="$HOME/.config/ansible/ansible.cfg"
 # export PATH="/home/linuxbrew/.linuxbrew/opt/node@22/bin:$PATH"
 # export LDFLAGS="-L/home/linuxbrew/.linuxbrew/opt/node@22/lib"

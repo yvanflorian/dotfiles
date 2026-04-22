@@ -71,7 +71,7 @@ return {
 			})
 
 			-- setup must be called before loading
-			vim.cmd.colorscheme("gruvbox")
+			--vim.cmd.colorscheme("gruvbox")
 		end,
 	},
 	-- TJ's onedark colorscheme
@@ -150,7 +150,7 @@ return {
 					-- parameter = "#ff0000", -- Properties (default: #c3c3d5)
 				},
 			})
-			-- vim.cmd("colorscheme vague")
+			vim.cmd("colorscheme vague")
 		end,
 	},
 }
